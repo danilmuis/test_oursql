@@ -81,9 +81,13 @@ class SubjectApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function restore($id)
     {
-        //
+        $subject = Subject::withTrashed()->where('id', $id)->restore();
+        if ($subject) {
+            return response()->json([
+                "message" => "restoring subject success"], 404);
+        }
     }
 
     /**
