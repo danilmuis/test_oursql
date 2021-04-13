@@ -69,9 +69,13 @@ class MethodApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function restore($id)
     {
-        //
+        $method = Method::withTrashed()->where('id', $id)->restore();
+        if ($method) {
+            return response()->json([
+                "message" => "restoring method success"], 404);
+        }
     }
 
     /**

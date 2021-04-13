@@ -24,6 +24,7 @@ Route::get('/methods', [MethodApiController::class, 'index']);
 Route::post('/method', [MethodApiController::class, 'store']);
 Route::put('/method/{id}', [MethodApiController::class, 'update']);
 Route::delete('/method/{id}', [MethodApiController::class, 'destroy']);
+Route::get('/restore/method/{id}', [MethodApiController::class, 'restore']);
 
 Route::get('/subjects', [SubjectApiController::class, 'index']);
 Route::post('/subject', [SubjectApiController::class, 'store']);
