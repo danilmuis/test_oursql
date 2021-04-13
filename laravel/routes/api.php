@@ -21,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/methods', [MethodApiController::class, 'index']);
 Route::post('/method', [MethodApiController::class, 'store']);
+Route::put('/method/{id}', [MethodApiController::class, 'update']);

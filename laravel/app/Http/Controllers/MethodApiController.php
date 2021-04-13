@@ -83,7 +83,23 @@ class MethodApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (Method::where('id', $id)->exists()) {
+            $validateData = Validator::make($request->all(), [
+                'methodName'          => 'required',
+            ]);
+            if ($validateData->fails()){
+                return response($validateData->errors(), 400);
+            } else {
+                $method = Method::find($id);
+                $method->methodName =  $request->methodName;
+                $method->save();
+                return response()->json([
+                    "message" => "method updated"], 201);
+            } 
+        } else {
+            return response()->json([
+                "message" => "method not found"], 404);
+        }
     }
 
     /**
