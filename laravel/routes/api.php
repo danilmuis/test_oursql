@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MethodApiController;
+use App\Http\Controllers\SubjectApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/methods', [MethodApiController::class, 'index']);
 Route::post('/method', [MethodApiController::class, 'store']);
 Route::put('/method/{id}', [MethodApiController::class, 'update']);
+
+Route::get('/subjects', [SubjectApiController::class, 'index']);
+// Route::post('/subject', [MethodApiController::class, 'store']);
+// Route::put('/subject/{id}', [MethodApiController::class, 'update']);
