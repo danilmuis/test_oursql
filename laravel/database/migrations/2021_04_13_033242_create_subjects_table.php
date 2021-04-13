@@ -19,6 +19,7 @@ class CreateSubjectsTable extends Migration
             $table->date('startDate')->nullable();
             $table->date('endDate')->nullable();
             $table->bigInteger('idMethod')->unsigned()->nullable();
+            $table->softDeletes();
             $table->foreign('idMethod')->references('id')->on('methods')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

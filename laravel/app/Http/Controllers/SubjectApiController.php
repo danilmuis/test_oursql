@@ -125,6 +125,13 @@ class SubjectApiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subject = Subject::find($id);
+        if (!$subject) {
+            return response()->json([
+                "message" => "subject not found"], 404);
+        }
+        $subject->delete();    
+        return response()->json([
+            "message" => "subject deleted"], 201);
     }
 }
