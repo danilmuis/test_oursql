@@ -110,6 +110,13 @@ class MethodApiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $method = Method::find($id);
+        if (!$method) {
+            return response()->json([
+                "message" => "method not found"], 404);
+        }
+        $method->delete();    
+        return response()->json([
+            "message" => "method deleted"], 201);
     }
 }
