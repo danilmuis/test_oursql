@@ -9,4 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Subject extends Model
 {
     use SoftDeletes;
+    protected $fillable = [
+        'id',
+        'subjectName',
+        'startDate',
+        'endDate',
+        'idMethod',
+    ];    
 }

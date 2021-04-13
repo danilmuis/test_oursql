@@ -26,7 +26,7 @@ Route::put('/method/{id}', [MethodApiController::class, 'update']);
 Route::delete('/method/{id}', [MethodApiController::class, 'destroy']);
 Route::get('/restore/method/{id}', [MethodApiController::class, 'restore']);
 
-Route::get('/subjects', [SubjectApiController::class, 'index']);
+Route::get('/subjects', [SubjectApiController::class, 'index'])->name('listSubject');
 Route::post('/subject', [SubjectApiController::class, 'store']);
 Route::put('/subject/{id}', [SubjectApiController::class, 'update']);
 Route::delete('/subject/{id}', [SubjectApiController::class, 'destroy']);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Validator;
+use DataTables;
 use App\Models\Method;
 use App\Models\Subject;
 use Illuminate\Http\Request;
@@ -26,9 +27,24 @@ class SubjectApiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getData(Request $request)
     {
-        //
+        // echo route('dashboard');
+        // return 1;
+        if ($request->ajax()) {
+            $data = Subject::select('*');
+
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                           $btn = '<a href="edit/'. $row->id .'" class="edit btn btn-primary btn-sm">Edit</a>
+                           <a href="delete/'.$row->id.'" class="edit btn btn-danger btn-sm">Delete</a>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+        return view('dashboard');
     }
 
     /**
