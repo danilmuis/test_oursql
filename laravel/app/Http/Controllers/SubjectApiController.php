@@ -40,14 +40,25 @@ class SubjectApiController extends Controller
     public function store(Request $request)
     {
         $validateData = Validator::make($request->all(), [
-            'methodName'    => 'required',
+            'subjectName'   => 'required',
+            'startDate'     => 'required',
+            'endDate'       => 'required',
+            'idMethod'      => 'required',
         ]);
         if ($validateData->fails()) {
             return response($validateData->errors(), 400);
         } else {
-            $method = new Method();
-            $method->methodName = $request->methodName;
-            $method->save();
+            $method = Method::find($request->idMethod);
+            if (!$method){
+                return response()->json([
+                    "message" => "method unavailable"], 500);
+            }
+            $subject = new Subject();
+            $subject->subjectName = $request->subjectName;
+            $subject->startDate = $request->startDate;
+            $subject->endDate = $request->endDate;
+            $subject->idMethod = $request->idMethod;
+            $subject->save();
             return response()->json([
                 "message" => "method added"], 201);
         }
@@ -84,22 +95,25 @@ class SubjectApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (Method::where('id', $id)->exists()) {
+        if (Subject::where('id', $id)->exists()) {
             $validateData = Validator::make($request->all(), [
-                'methodName'          => 'required',
+                'subjectName'   => '',
+                'startDate'     => '',
+                'endDate'       => '',
+                'idMethod'      => '',
             ]);
-            if ($validateData->fails()){
+            if ($validateData->fails()) {
                 return response($validateData->errors(), 400);
             } else {
-                $method = Method::find($id);
-                $method->methodName =  $request->methodName;
-                $method->save();
+                $subject = Subject::find($id);
+                $subject->subjectName = $request->subjectName == null ? $subject->subjectName : $request->subjectName;
+                $subject->startDate = $request->startDate == null ? $subject->startDate : $request->startDate;
+                $subject->endDate = $request->endDate == null ? $subject->endDate : $request->endDate;
+                $subject->idMethod = $request->idMethod == null ? $subject->idMethod : $request->idMethod;
+                $subject->save();
                 return response()->json([
-                    "message" => "method updated"], 201);
-            } 
-        } else {
-            return response()->json([
-                "message" => "method not found"], 404);
+                    "message" => "subject updated"], 201);
+            }
         }
     }
 

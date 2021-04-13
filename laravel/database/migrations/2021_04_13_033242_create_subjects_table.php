@@ -15,10 +15,10 @@ class CreateSubjectsTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('subjectsName');
-            $table->date('startDate');
-            $table->date('endDate');
-            $table->bigInteger('idMethod')->unsigned();
+            $table->string('subjectName')->nullable();
+            $table->date('startDate')->nullable();
+            $table->date('endDate')->nullable();
+            $table->bigInteger('idMethod')->unsigned()->nullable();
             $table->foreign('idMethod')->references('id')->on('methods')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

@@ -25,5 +25,5 @@ Route::post('/method', [MethodApiController::class, 'store']);
 Route::put('/method/{id}', [MethodApiController::class, 'update']);
 
 Route::get('/subjects', [SubjectApiController::class, 'index']);
-// Route::post('/subject', [MethodApiController::class, 'store']);
-// Route::put('/subject/{id}', [MethodApiController::class, 'update']);
+Route::post('/subject', [SubjectApiController::class, 'store']);
+Route::put('/subject/{id}', [SubjectApiController::class, 'update']);
