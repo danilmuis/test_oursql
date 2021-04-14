@@ -39,13 +39,13 @@ class MethodApiController extends Controller
     public function store(Request $request)
     {
         $validateData = Validator::make($request->all(), [
-            'methodName'    => 'required',
+            'methodname'    => 'required',
         ]);
         if ($validateData->fails()) {
             return response($validateData->errors(), 400);
         } else {
             $method = new Method();
-            $method->methodName = $request->methodName;
+            $method->methodname = $request->methodname;
             $method->save();
             return response()->json([
                 "message" => "method added"], 201);
@@ -89,13 +89,13 @@ class MethodApiController extends Controller
     {
         if (Method::where('id', $id)->exists()) {
             $validateData = Validator::make($request->all(), [
-                'methodName'          => 'required',
+                'methodname'          => 'required',
             ]);
             if ($validateData->fails()){
                 return response($validateData->errors(), 400);
             } else {
                 $method = Method::find($id);
-                $method->methodName =  $request->methodName;
+                $method->methodname =  $request->methodname;
                 $method->save();
                 return response()->json([
                     "message" => "method updated"], 201);

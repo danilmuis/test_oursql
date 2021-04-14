@@ -15,7 +15,7 @@ class CreateMethodsTable extends Migration
     {
         Schema::create('methods', function (Blueprint $table) {
             $table->id();
-            $table->string('methodName');
+            $table->string('methodname');
             $table->softDeletes();
             $table->timestamps();
         });

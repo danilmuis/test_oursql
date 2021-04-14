@@ -22,6 +22,23 @@ class SubjectApiController extends Controller
         return response($subject, 200);
     }
 
+    public function join(){
+        $data = DB::table('subjects')
+        ->join('methods', 'subjects.idmethod', '=', 'methods.id')
+        ->select('methodname','subjectname', 'startdate', 'enddate')
+        ->get();
+        return response($data, 200);
+    }
+
+    public function table()
+    {
+        $data = DB::table('subjects')
+        ->join('methods', 'subjects.idmethod', '=', 'methods.id')
+        ->select('methodname','subjectname', 'startdate', 'enddate')
+        ->get();
+        return view('table',['data' => $data]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -38,7 +55,7 @@ class SubjectApiController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                             $x = $row->id-1;
-                           $btn = '<a class="edit btn btn-primary btn-sm" id="edit-detail" onClick="callInputModal(\''.$row->id.'\',\''.$row->subjectName.'\',\''.$row->startDate.'\',\''.$row->endDate.'\',\''.$row->idMethod.'\')">Edit</a>
+                           $btn = '<a class="edit btn btn-primary btn-sm" id="edit-detail" onClick="callInputModal(\''.$row->id.'\',\''.$row->subjectname.'\',\''.$row->startDate.'\',\''.$row->endDate.'\',\''.$row->idMethod.'\')">Edit</a>
                            <a class="edit btn btn-danger btn-sm">Delete</a>';
                             return $btn;
                     })
@@ -57,27 +74,27 @@ class SubjectApiController extends Controller
     public function store(Request $request)
     {
         $validateData = Validator::make($request->all(), [
-            'subjectName'   => 'required',
-            'startDate'     => 'required',
-            'endDate'       => 'required',
-            'idMethod'      => 'required',
+            'subjectname'   => 'required',
+            'startdate'     => 'required',
+            'enddate'       => 'required',
+            'idmethod'      => 'required',
         ]);
         if ($validateData->fails()) {
             return response($validateData->errors(), 400);
         } else {
-            $method = Method::find($request->idMethod);
+            $method = Method::find($request->idmethod);
             if (!$method){
                 return response()->json([
                     "message" => "method unavailable"], 500);
             }
             $subject = new Subject();
-            $subject->subjectName = $request->subjectName;
-            $subject->startDate = $request->startDate;
-            $subject->endDate = $request->endDate;
-            $subject->idMethod = $request->idMethod;
+            $subject->subjectname = $request->subjectname;
+            $subject->startdate = $request->startdate;
+            $subject->enddate = $request->enddate;
+            $subject->idmethod = $request->idmethod;
             $subject->save();
             return response()->json([
-                "message" => "method added"], 201);
+                "message" => "subject added"], 201);
         }
     }
 
@@ -118,19 +135,19 @@ class SubjectApiController extends Controller
     {
         if (Subject::where('id', $id)->exists()) {
             $validateData = Validator::make($request->all(), [
-                'subjectName'   => '',
-                'startDate'     => '',
-                'endDate'       => '',
-                'idMethod'      => '',
+                'subjectname'   => '',
+                'startdate'     => '',
+                'enddate'       => '',
+                'idmethod'      => '',
             ]);
             if ($validateData->fails()) {
                 return response($validateData->errors(), 400);
             } else {
                 $subject = Subject::find($id);
-                $subject->subjectName = $request->subjectName == null ? $subject->subjectName : $request->subjectName;
-                $subject->startDate = $request->startDate == null ? $subject->startDate : $request->startDate;
-                $subject->endDate = $request->endDate == null ? $subject->endDate : $request->endDate;
-                $subject->idMethod = $request->idMethod == null ? $subject->idMethod : $request->idMethod;
+                $subject->subjectname = $request->subjectname == null ? $subject->subjectname : $request->subjectname;
+                $subject->startdate = $request->startdate == null ? $subject->startdate : $request->startdate;
+                $subject->enddate = $request->enddate == null ? $subject->enddate : $request->enddate;
+                $subject->idmethod = $request->idmethod == null ? $subject->idmethod : $request->idmethod;
                 $subject->save();
                 return response()->json([
                     "message" => "subject updated"], 201);

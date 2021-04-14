@@ -31,3 +31,4 @@ Route::post('/subject', [SubjectApiController::class, 'store']);
 Route::post('/subject/{id}', [SubjectApiController::class, 'update']);
 Route::delete('/subject/{id}', [SubjectApiController::class, 'destroy']);
 Route::get('/restore/subject/{id}', [SubjectApiController::class, 'restore']);
+Route::get('/join', [SubjectApiController::class, 'join']);
