@@ -55,7 +55,7 @@ class SubjectApiController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                             $x = $row->id-1;
-                           $btn = '<a class="edit btn btn-primary btn-sm" id="edit-detail" onClick="callInputModal(\''.$row->id.'\',\''.$row->subjectname.'\',\''.$row->startDate.'\',\''.$row->endDate.'\',\''.$row->idMethod.'\')">Edit</a>
+                           $btn = '<a class="edit btn btn-primary btn-sm" id="edit-detail" onClick="callInputModal(\''.$row->id.'\',\''.$row->subjectname.'\',\''.$row->startdate.'\',\''.$row->enddate.'\',\''.$row->idmethod.'\')">Edit</a>
                            <a class="edit btn btn-danger btn-sm">Delete</a>';
                             return $btn;
                     })

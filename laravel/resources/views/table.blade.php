@@ -18,12 +18,7 @@
         <thead>
             <tr>
             <th scope="col">Method</th>
-            <th scope="col">Januari</th>
-            <th scope="col">Februari</th>
-            <th scope="col">Maret</th>
-            <th scope="col">April</th>
-            <th scope="col">Mei</th>
-            <th scope="col">Juni</th>
+            <th scope="col">Subject</th>
             </tr>
         </thead>
         <tbody>
@@ -31,35 +26,18 @@
                 $before = "x";
             @endphp
             @foreach($data as $item)
-            @if($before != $item->methodname)
-                <tr>
-                    <th scope="row">{{$item->methodname}}</th>
-                </tr>
-                <td>
-
-                @php
-                    $before = $item->methodname;
-                @endphp
-            @endif
-                <li>{{$item->subjectname}}</li>
-            @if($before != $item->methodname)
-                </td>
-            @endif
-            <!-- <td>Otto</td> -->
-            <!-- <td>@mdo</td> -->
+                @if($before != $item->methodname)
+                    <tr>
+                        <th scope="row">{{$item->methodname}}</th>
+                    @php
+                        $before = $item->methodname;
+                    @endphp
+                @endif
+                    <td>
+                        <li>{{$item->subjectname}}</li>
+                    </td>
             @endforeach
-            <!-- <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
             </tr>
-
-            <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-            </tr> -->
         </tbody>
         </table>
 

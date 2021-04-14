@@ -67,28 +67,28 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Subject Name</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="modal-input-form-subjectName" placeholder="Subject Name" name="subjectName" required>
+                                <input type="text" class="form-control" id="modal-input-form-subjectname" placeholder="Subject Name" name="subjectname" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="modal-input-form-startDate" placeholder="Start Date" name="startDate" required>
+                                <input type="text" class="form-control" id="modal-input-form-startdate" placeholder="Start Date" name="startdate" required>
                             </div>
                         </div>
                         
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">end Date</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="modal-input-form-endDate" placeholder="End Date" name="endDate" required>
+                                <input type="text" class="form-control" id="modal-input-form-enddate" placeholder="End Date" name="enddate" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">id Method</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="modal-input-form-idMethod" placeholder="id Method" name="idMethod" required>
+                                <input type="text" class="form-control" id="modal-input-form-idmethod" placeholder="id Method" name="idmethod" required>
                             </div>
                         </div>
 
@@ -113,10 +113,10 @@
         ajax: "{{ route('dashboard') }}",
         columns: [
             {data: 'id', name : 'id'},
-            {data: 'subjectName', name: 'subjectName'},
-            {data: 'startDate', name: 'startDate'},
-            {data: 'endDate', name: 'endDate'},
-            {data: 'idMethod', name: 'idMethod'},
+            {data: 'subjectname', name: 'subjectname'},
+            {data: 'startdate', name: 'startdate'},
+            {data: 'enddate', name: 'enddate'},
+            {data: 'idmethod', name: 'idmethod'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
@@ -126,7 +126,7 @@
   });
 
     function getSubjects(){
-        var url = "http://localhost/TestBTP/api/subjects";
+        var url = "{{route('listSubject')}}";
         $.ajax({
             type: 'GET',
             url: url,
@@ -146,24 +146,24 @@
 
     function callInputModalInput(){
         $('#subjectInputModal').modal('show');
-        $( "#modal-input-form-subjectName" ).val("");
-        $( "#modal-input-form-startDate" ).val("");
-        $( "#modal-input-form-endDate" ).val("");
-        $( "#modal-input-form-idMethod" ).val("");
+        $( "#modal-input-form-subjectname" ).val("");
+        $( "#modal-input-form-startdate" ).val("");
+        $( "#modal-input-form-enddate" ).val("");
+        $( "#modal-input-form-idmethod" ).val("");
     }
 
     function callInputModal(id, subjectName, startDate, endDate, idMethod){
         $('#subjectInputModal').modal('show');
         $( "#modal-input-form-subject-id" ).val(id);
-        $( "#modal-input-form-subjectName" ).val(subjectName);
-        $( "#modal-input-form-startDate" ).val(startDate);
-        $( "#modal-input-form-endDate" ).val(endDate);
-        $( "#modal-input-form-idMethod" ).val(idMethod);
+        $( "#modal-input-form-subjectname" ).val(subjectName);
+        $( "#modal-input-form-startdate" ).val(startDate);
+        $( "#modal-input-form-enddate" ).val(endDate);
+        $( "#modal-input-form-idmethod" ).val(idMethod);
     }
     function insertSubject(data){
         $.ajax({
             type: 'POST',
-            url: "http://localhost/TestBTP/api/subject",
+            url: "{{route('addSubject')}}",
             dataType: "JSON",
             data: new FormData(data),
             processData: false,
@@ -184,7 +184,7 @@
     function updateSubject(data,id){
         $.ajax({
             type: 'POST',
-            url: "http://localhost/TestBTP/api/subject/" + id,
+            url: "{{route('addSubject')}}/"+id,
             dataType: "JSON",
             data: new FormData(data),
             processData: false,
