@@ -35,13 +35,16 @@
                 <tr>
                     <th scope="row">{{$item->methodname}}</th>
                 </tr>
+                <td>
+
                 @php
                     $before = $item->methodname;
                 @endphp
             @endif
-            <td>
                 <li>{{$item->subjectname}}</li>
-            </td>
+            @if($before != $item->methodname)
+                </td>
+            @endif
             <!-- <td>Otto</td> -->
             <!-- <td>@mdo</td> -->
             @endforeach
