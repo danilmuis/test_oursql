@@ -33,12 +33,13 @@ class SubjectApiController extends Controller
         // return 1;
         if ($request->ajax()) {
             $data = Subject::select('*');
-
+            $i = 0;
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                           $btn = '<a href="edit/'. $row->id .'" class="edit btn btn-primary btn-sm">Edit</a>
-                           <a href="delete/'.$row->id.'" class="edit btn btn-danger btn-sm">Delete</a>';
+                            $x = $row->id-1;
+                           $btn = '<a class="edit btn btn-primary btn-sm" id="edit-detail" onClick="callInputModal(\''.$row->id.'\',\''.$row->subjectName.'\',\''.$row->startDate.'\',\''.$row->endDate.'\',\''.$row->idMethod.'\')">Edit</a>
+                           <a class="edit btn btn-danger btn-sm">Delete</a>';
                             return $btn;
                     })
                     ->rawColumns(['action'])
