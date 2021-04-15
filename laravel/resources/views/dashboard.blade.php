@@ -185,6 +185,7 @@
             type: 'POST',
             url: "{{route('addSubject')}}/"+id,
             dataType: "JSON",
+            data: new FormData(data),
             processData: false,
             contentType: false,
             beforeSend: function( xhr ) {
