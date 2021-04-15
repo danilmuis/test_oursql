@@ -140,7 +140,6 @@
         .done(function(data) {
         myData = JSON.parse(data);
         });
-
     
     }
 
@@ -186,7 +185,6 @@
             type: 'POST',
             url: "{{route('addSubject')}}/"+id,
             dataType: "JSON",
-            data: new FormData(data),
             processData: false,
             contentType: false,
             beforeSend: function( xhr ) {
@@ -198,6 +196,22 @@
         })
         .done(function( data ) {
             $('#subjectInputModal').modal('toggle');
+            $('.data-table').DataTable().ajax.reload();
+        })
+    }
+
+    function deleteSubject(id){
+        $.ajax({
+            type: 'GET',
+            url: "{{route('addSubject')}}/"+id,
+            beforeSend: function( xhr ) {
+                xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr);
+            }
+        })
+        .done(function( data ) {
             $('.data-table').DataTable().ajax.reload();
         })
     }
