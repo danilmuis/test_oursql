@@ -9,13 +9,22 @@ class DummyController extends Controller
 {
     //
     public function index(Request $request){
-        // $data = DB::table('dummy')->get();
-        // echo json_encode($data);
-        // return 1;
+        
         if ($request->ajax()) {
-            $data = DB::table('dummy')->get();
+            // $data = DB::table('dummy')->get();
             $i = 0;
-            return Datatables::of($data)
+            $conn = mysqli_connect('127.0.0.1','root','','bc');
+            $sql = "SELECT * FROM dummy;";
+            $result = mysqli_query($conn, $sql);
+            $data = [];
+            while($row = mysqli_fetch_assoc($result)) {
+                $x = [
+                    'id' => $row["id"], 
+                    'data' => $row["data"]
+                ];
+                array_push($data,(object) $x);
+            }
+            return Datatables::of(($data))
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                            $btn = '<a class="edit btn btn-primary btn-sm" id="edit-detail" onClick="callInputModal(\''.$row->id.'\',\''.$row->data.'\')">Edit</a>
