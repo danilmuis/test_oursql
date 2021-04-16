@@ -8,12 +8,15 @@ use DataTables;
 class DummyController extends Controller
 {
     //
+    private $s = '127.0.0.1';
+    private $u = 'root';
+    private $p = '';
+    private $d = 'bc';
     public function index(Request $request){
         
         if ($request->ajax()) {
             // $data = DB::table('dummy')->get();
-            $i = 0;
-            $conn = mysqli_connect('127.0.0.1','root','','bc');
+            $conn = mysqli_connect($this->s,$this->u,$this->p,$this->d);
             $sql = "SELECT * FROM dummy;";
             $result = mysqli_query($conn, $sql);
             $data = [];
@@ -39,7 +42,10 @@ class DummyController extends Controller
     public function store(Request $request)
     {
        
-        DB::insert('insert into dummy set data=?', [$request->data]);
+        // DB::insert('insert into dummy set data=?', [$request->data]);
+        $conn = mysqli_connect($this->s,$this->u,$this->p,$this->d);
+        $sql = "insert into dummy set data='". $request->data ."'";
+        $result = mysqli_query($conn, $sql);
         return response()->json([
             "message" => "dummy added"], 201);
         
@@ -49,17 +55,23 @@ class DummyController extends Controller
     {
        
         // DB::insert('insert into dummy set data=?', [$request->data]);
-        DB::table('dummy')
-        ->where('id',$id)
-        ->update(['data' => $request->data]);
+        // DB::table('dummy')
+        // ->where('id',$id)
+        // ->update(['data' => $request->data]);
+
+        $conn = mysqli_connect($this->s,$this->u,$this->p,$this->d);
+        $sql = "update dummy set data='". $request->data ."' WHERE id='".$id."'";
+        $result = mysqli_query($conn, $sql);
         return response()->json([
             "message" => "dummy updated"], 201);
         
     }
     public function destroy($id)
     {
-        DB::table('dummy')->where('id', $id)->delete();
-           
+        // DB::table('dummy')->where('id', $id)->delete();
+        $conn = mysqli_connect($this->s,$this->u,$this->p,$this->d);
+        $sql = "delete from dummy WHERE id='".$id."'";
+        $result = mysqli_query($conn, $sql);
         return response()->json([
             "message" => "dummy deleted"], 201);
     }

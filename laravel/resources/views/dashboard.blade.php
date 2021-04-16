@@ -109,7 +109,7 @@
         $('#subjectInputModal').modal('show');
         $('#judul').html("Update Data");
         $("#modal-input-form-subject-id" ).val(id);
-        $("#modal-input-form-subjectname" ).val(subjectName);
+        $("#modal-input-form-subjectname" ).val(data);
        
     }
 
