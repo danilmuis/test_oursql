@@ -17,15 +17,6 @@
     
 <div class="container">
     <h1>BTP Test</h1>
-    <a href="#" class="btn btn-success my-2" onClick = "callInputModalInput()">Add Subject</a>
-    <!-- <form action="" method="get">
-        <div class="form-group col-lg-12 mx-auto mb-0">
-            <button type ="submit" class="btn btn-primary">
-                <span class="font-weight-bold">Add Employee</span>
-            </button>
-        </div>
-        <br>
-    </form> -->
     <table class="table table-bordered data-table">
         <thead>
             <tr>
@@ -36,84 +27,19 @@
                 <th>April</th>
                 <th>Mei</th>
                 <th>Juni</th>
-                <!-- <th width="100px">Action</th> -->
             </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
 
-    <!-- <form action="" method="get">
-    <div class="form-group col-lg-12 mx-auto mb-0">
-        <button type ="submit" class="btn btn-danger">
-            <span class="font-weight-bold">Logout</span>
-        </button>
-    </div>
-</form> -->
 </div>
 
-
-    <!-- Modal -->
-    <div class="modal fade" id="subjectInputModal" tabindex="-1" role="dialog" arialabelledby="subjectInputModal" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header"><h3>Input Subject</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                
-                <div class="modal-body">
-                    <form id="modal-input-form" enctype="multipart/form-data">
-                        <input type="hidden" class="form-control" id="modal-input-form-subject-id" name="id">
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Subject Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="modal-input-form-subjectname" placeholder="Subject Name" name="subjectname" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Start Date</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="modal-input-form-startdate" placeholder="Start Date" name="startdate" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">End Date</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="modal-input-form-enddate" placeholder="End Date" name="enddate" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">id Method</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="modal-input-form-idmethod" placeholder="id Method" name="idmethod" required>
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                        <button type="submit" id="modal-input-form-submit" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
    
 <script type="text/javascript">
 
   $(function () {
-    var month_name = function(dt){
-        mlist = [ "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember" ];
-        return mlist[dt.getMonth()];
-    };
-    var myData;
-    var beforeMethod = '';
     var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
@@ -122,11 +48,6 @@
             {
                 data: 'methodname', 
                 name : 'methodname',
-                render : function(data,type,row,meta){
-                    var output = data;
-
-                    return data;
-                }
             },
             {
                 data: null, 
