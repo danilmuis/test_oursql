@@ -14,9 +14,5 @@ use App\Http\Controllers\SubjectApiController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/', 'App\Http\Controllers\SubjectApiController@getData')->name('dashboard');
-Route::get('/table', 'App\Http\Controllers\SubjectApiController@table')->name('table');
+Route::get('/', 'App\Http\Controllers\DummyController@index')->name('dashboard');

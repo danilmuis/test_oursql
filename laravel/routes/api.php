@@ -2,8 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MethodApiController;
-use App\Http\Controllers\SubjectApiController;
+use App\Http\Controllers\DummyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,15 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/methods', [MethodApiController::class, 'index']);
-Route::post('/method', [MethodApiController::class, 'store']);
-Route::put('/method/{id}', [MethodApiController::class, 'update']);
-Route::delete('/method/{id}', [MethodApiController::class, 'destroy']);
-Route::get('/restore/method/{id}', [MethodApiController::class, 'restore']);
-
-Route::get('/subjects', [SubjectApiController::class, 'index'])->name('listSubject');
-Route::post('/subject', [SubjectApiController::class, 'store'])->name('addSubject');
-Route::post('/subject/{id}', [SubjectApiController::class, 'update']);
-Route::get('/subject/{id}', [SubjectApiController::class, 'destroy'])->name('deleteSubject');
-Route::get('/restore/subject/{id}', [SubjectApiController::class, 'restore']);
-Route::get('/join', [SubjectApiController::class, 'join']);
+Route::post('/dummy', [DummyController::class, 'store'])->name('addDummy');
+Route::post('/dummy/{id}', [DummyController::class, 'update'])->name('editDummy');
+Route::get('/dummy/{id}', [DummyController::class, 'destroy'])->name('deleteDummy');

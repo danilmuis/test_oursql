@@ -13,11 +13,9 @@ class CreateMethodsTable extends Migration
      */
     public function up()
     {
-        Schema::create('methods', function (Blueprint $table) {
-            $table->id();
-            $table->string('methodname');
-            $table->softDeletes();
-            $table->timestamps();
+        Schema::create('dummy', function (Blueprint $table) {
+            $table->unsignedInteger('id')->autoIncrement();
+            $table->text('data');
         });
     }
 
