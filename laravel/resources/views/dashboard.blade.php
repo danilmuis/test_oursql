@@ -18,14 +18,6 @@
 <div class="container">
     <h1>BTP Test</h1>
     <a href="#" class="btn btn-success my-2" onClick = "callInputModalInput()">Add Subject</a>
-    <!-- <form action="" method="get">
-        <div class="form-group col-lg-12 mx-auto mb-0">
-            <button type ="submit" class="btn btn-primary">
-                <span class="font-weight-bold">Add Employee</span>
-            </button>
-        </div>
-        <br>
-    </form> -->
     <table class="table table-bordered data-table">
         <thead>
             <tr>
@@ -40,16 +32,7 @@
         <tbody>
         </tbody>
     </table>
-
-    <!-- <form action="" method="get">
-    <div class="form-group col-lg-12 mx-auto mb-0">
-        <button type ="submit" class="btn btn-danger">
-            <span class="font-weight-bold">Logout</span>
-        </button>
-    </div>
-</form> -->
 </div>
-
 
     <!-- Modal -->
     <div class="modal fade" id="subjectInputModal" tabindex="-1" role="dialog" arialabelledby="subjectInputModal" aria-hidden="true">
@@ -104,7 +87,6 @@
 </body>
    
 <script type="text/javascript">
-
   $(function () {
     var myData;
     var table = $('.data-table').DataTable({
@@ -140,11 +122,11 @@
         .done(function(data) {
         myData = JSON.parse(data);
         });
-    
     }
 
     function callInputModalInput(){
         $('#subjectInputModal').modal('show');
+        $( "#modal-input-form-subject-id" ).val("");
         $( "#modal-input-form-subjectname" ).val("");
         $( "#modal-input-form-startdate" ).val("");
         $( "#modal-input-form-enddate" ).val("");
@@ -159,6 +141,7 @@
         $( "#modal-input-form-enddate" ).val(endDate);
         $( "#modal-input-form-idmethod" ).val(idMethod);
     }
+
     function insertSubject(data){
         $.ajax({
             type: 'POST',
@@ -226,11 +209,9 @@
                 insertSubject(this);
             }
             else{
-                // console.log(this);
                 updateSubject(this,formData[0].value);
             }
         })
     })
-
 </script>
 </html>

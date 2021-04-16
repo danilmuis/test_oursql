@@ -30,26 +30,69 @@ class SubjectApiController extends Controller
         return response($data, 200);
     }
 
-    public function table()
+    public function table(Request $request)
     {
         $data = DB::table('subjects')
-        ->join('methods', 'subjects.idmethod', '=', 'methods.id')
-        ->select('methodname','subjectname', 'startdate', 'enddate')
+        ->join('methods', 'subjects.idmethod', '=', 'methods.id') 
+        ->select(DB::raw("methods.id,methodname,startdate,CONCAT(subjectname , ' (', startdate,' - ',enddate, ')') as object"))
+        ->orderBy('methods.id')
         ->get();
-        return view('table',['data' => $data]);
-    }
+        
+        
+            
+        if ($request->ajax()) {
+            $before = $data[0]->id;
+            $subject_array = [];
+            $result = [];
+            $i = 0;
+            foreach($data as $x){
+                if($before == $x->id){
+                    $object_subject = [
+                        'date' => $x->startdate,
+                        'data' => $x->object
+                    ];
+                    array_push($subject_array,$object_subject);
+                }else{
+                    $object = [
+                        'id'       => $data[$i-1]->id,
+                        'methodname' => $data[$i-1]->methodname,
+                        'subject_array' => $subject_array
+                    ];
+                    array_push($result,$object);
+                    $subject_array = [];
+                    $object_subject = [
+                        'date' => $x->startdate,
+                        'data' => $x->object
+                    ];
+                    array_push($subject_array,$object_subject);
+                }
+                $before = $x->id;
+                $i++;
+            }
 
+            $object = [
+                'id'       => $data[$i-1]->id,
+                'methodname' => $data[$i-1]->methodname,
+                'subject_array' => $subject_array
+            ];
+            array_push($result,$object);
+            
+            
+            return Datatables::of($result)
+                    ->make(true);
+        }
+        return view('table');
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function getData(Request $request)
     {
-        // echo route('dashboard');
-        // return 1;
         if ($request->ajax()) {
-            $data = Subject::select('*');
+            $data = DB::table('subjects');
             $i = 0;
             return Datatables::of($data)
                     ->addIndexColumn()
